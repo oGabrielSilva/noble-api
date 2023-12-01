@@ -63,7 +63,13 @@ export class AuthController {
     const userByEmail = await UserDataModel.findOne({ email })
     if (userByEmail) throw new ConflictException('Email informado já está cadastrado')
     const password = await encoder.standardSaltHash(pass)
-    const user = new UserDataModel({ email, name, gender, birthYear, password })
+    const user = new UserDataModel({
+      email,
+      name,
+      gender,
+      birthYear,
+      password,
+    })
     await user.save()
     res
       .setHeader(WEB_TOKEN_HEADER_KEY, token.create(user._id.toString(), email, name))

@@ -17,6 +17,7 @@ export class UserModel {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static from(object: any) {
     const instance = UserModel.inst()
+    if (!AuthValidation.isObjectIdValid(object._id)) return null
     if (!AuthValidation.nameIsValid(object.name)) return null
     if (!AuthValidation.emailIsValid(object.email)) return null
     if (!AuthValidation.genderIsValid(object.gender)) return null
@@ -25,6 +26,7 @@ export class UserModel {
     instance.email = object.email
     instance.gender = object.gender
     instance.birthYear = object.birthYear
+    instance.id = object._id
     return instance
   }
 }
