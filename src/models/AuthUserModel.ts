@@ -1,9 +1,8 @@
-import { ObjectId } from 'mongoose'
 import { UserModel } from './UserModel'
 
 export class AuthUserModel extends UserModel {
   public constructor(
-    public readonly id: ObjectId,
+    public readonly id: string,
     public readonly password: string,
     name: string,
     email: string,
@@ -11,6 +10,6 @@ export class AuthUserModel extends UserModel {
     birthYear: number,
     photoUri?: string,
   ) {
-    super(name, email, gender, birthYear, photoUri)
+    super(id, name, email, gender, birthYear, photoUri)
   }
 }
