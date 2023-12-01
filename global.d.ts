@@ -5,6 +5,7 @@ import type { PrismaClient } from '@prisma/client'
 export declare global {
   interface Req<T = null> extends Request {
     body: T
+    createdPhotoUri?: string
   }
 
   interface Res extends Response {}

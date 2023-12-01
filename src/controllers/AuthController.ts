@@ -6,7 +6,7 @@ import { NotFoundException } from '../exceptions/NotFoundException'
 import { UnauthorizedException } from '../exceptions/UnauthorizedException'
 import { AuthUserModel } from '../models/AuthUserModel'
 import { UserModel } from '../models/UserModel'
-import { WEB_TOKEN_HEADER_KEY, getAvatarUri } from '../resources/constants'
+import { WEB_TOKEN_HEADER_KEY } from '../resources/constants'
 import { HTTPStatus } from '../resources/HTTPStatus'
 import { Response } from '../resources/Response'
 import { EncoderTool } from '../tools/EncoderTool'
@@ -86,9 +86,9 @@ export class AuthController {
 
   public static async avatar(req: Req, res: Res, next: Next) {
     AuthController.profileMulter.single('avatar')(req, res, async err => {
-      console.log(req.file)
+      console.log(res.locals.uri)
       if (err) return next(err)
-      res.status(200).json(Response.JSON(false, getAvatarUri(res.locals.uri), HTTPStatus.OK))
+      res.status(200).json(Response.JSON(false, res.locals.uri, HTTPStatus.OK))
     })
   }
 }

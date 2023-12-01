@@ -18,8 +18,9 @@ export class MulterService {
         UserDataModel.findById(id).then(user => {
           if (!user) return cb(new NotFoundException('Usuário não existe'), '')
           const fileName = `${id}` + '.' + file.fieldname
-          user.photoUri = getAvatarUri(fileName)
-          req.app.locals.uri = user.photoUri
+          const uri = getAvatarUri(fileName)
+          user.photoUri = uri
+          req.res!.locals.uri = uri
           user.save()
           cb(null, fileName)
         })
