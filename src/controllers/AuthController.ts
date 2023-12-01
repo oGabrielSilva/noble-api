@@ -87,7 +87,7 @@ export class AuthController {
   public static async avatar(req: Req, res: Res, next: Next) {
     AuthController.profileMulter.single('avatar')(req, res, async err => {
       if (err) return next(err)
-      res.status(200).json(Response.JSON(false, getAvatarUri(req.file!.filename), HTTPStatus.OK))
+      res.status(200).json(Response.JSON(false, getAvatarUri(res.locals.uri), HTTPStatus.OK))
     })
   }
 }
